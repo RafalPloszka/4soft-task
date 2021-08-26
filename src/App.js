@@ -1,22 +1,30 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
 import './App.css';
+import { AllApps, FollowedAppsList } from './components';
 
-function App() {
+const App = () => {
+  const [apps, setApps] = useState([]);
+  const [followedAppsIds, setFollowedAppsIds] = useState([]);
+  useEffect(() => {
+    fetch("https://api.recruitment.4soft.tech/list")
+    .then(res => res.json()).then(result => setApps(result));
+  }, []);
+
+  const follow = (id) => {
+    setFollowedAppsIds([...followedAppsIds, id]);
+  };
+
+  const unfollow = (id) => {
+    setFollowedAppsIds(followedAppsIds.filter((checked) => checked !== id));
+  };
+
+  const followedApps = apps.filter((app) => followedAppsIds.includes(app.id));
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <FollowedAppsList data={followedApps} unfollow={unfollow} />
+        <AllApps apps={apps} follow={follow} followedAppsIds={followedAppsIds} />
       </header>
     </div>
   );
