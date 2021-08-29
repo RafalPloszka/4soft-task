@@ -1,8 +1,14 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
+import styled from 'styled-components';
 
 import { AppContextProvider } from './store/appContext';
 import { AllApps, FollowedApps } from './views';
-import './App.css';
+import GlobalStyle from './globalStyle';
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -10,12 +16,11 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <AppContextProvider>
-        <div className="App">
-          <header className="App-header">
-            <FollowedApps />
-            <AllApps />
-          </header>
-        </div>
+      <GlobalStyle />
+        <Wrapper>
+          <FollowedApps />
+          <AllApps />
+        </Wrapper>
       </AppContextProvider>
     </QueryClientProvider>
   );

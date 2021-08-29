@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import styled from 'styled-components';
+
 import { FollowedAppDetails } from '.';
 
-const FollowedAppBox = ({ id, follow, unfollow }) => {
+const LoadingBox = styled.div`
+  width: 30%;
+  margin: 16px auto;
+  padding: 24px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const FollowedAppBox = ({ id, unfollow }) => {
 
   const [refresh, setRefresh] = useState(false);
 
@@ -21,15 +34,14 @@ const FollowedAppBox = ({ id, follow, unfollow }) => {
     fetchSingleApp(id)
   );
 
-
   return (
-    <div>
-      {status === "error" && <div>{error.message}</div>}
+    <>
+      {status === "error" ? <div>{error.message}</div> : null}
 
-      {status === "loading" && <div>Loading...</div>}
+      {status === "loading" ? <LoadingBox>Loading...</LoadingBox> : null}
 
       {status === "success" && <FollowedAppDetails data={data} refresh={() => setRefresh(!refresh)} unfollow={unfollow} />}
-    </div>
+    </>
   )
 }
 
