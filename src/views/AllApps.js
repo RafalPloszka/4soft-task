@@ -7,7 +7,9 @@ const Wrapper = styled.section`
   width: 40vw;
   height: 100vh;
   border-left: 2px solid #ededed;
-  box-shadow: -0px 8px 24px 0px rgba(66, 68, 90, 1);
+  -webkit-box-shadow: 0 8px 24px 0px var(--shadow);
+  -moz-box-shadow: 0 8px 24px 0px var(--shadow);
+  box-shadow: 0px 8px 24px 0px var(--shadow);
   padding: 16px 16px 24px;
   display: flex;
   flex-direction: column;

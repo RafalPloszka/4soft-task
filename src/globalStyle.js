@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     /* font-size: calc(10px + 2vmin); */
     --main: #4eb5f1;
     --main-hover: #4095c6;
+    --shadow: #42445a;
   }
 `;
  

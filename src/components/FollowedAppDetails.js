@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
-import { ImInfo, ImEyeMinus, ImSpinner11, ImCross } from 'react-icons/im';
+import { 
+  ImInfo, 
+  ImEyeMinus,
+  ImSpinner11,
+  ImCross,
+  ImUsers,
+  ImUserTie,
+} from 'react-icons/im';
 
 import { Button } from '.';
 
@@ -13,16 +20,26 @@ const Container = styled.div`
   padding: 24px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  -webkit-box-shadow: 4px 4px 12px 0px rgba(66, 68, 90, 1);
-  -moz-box-shadow: 4px 4px 12px 0px rgba(66, 68, 90, 1);
-  box-shadow: 4px 4px 12px 0px rgba(66, 68, 90, 1);
+  -webkit-box-shadow: 4px 4px 12px 0px var(--shadow);
+  -moz-box-shadow: 4px 4px 12px 0px var(--shadow);
+  box-shadow: 4px 4px 12px 0px var(--shadow);
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 `;
 
 const Logo = styled.img`
   margin-right: 12px;
+`;
+
+const StyledName = styled.span`
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    color: var(--main);
+  };
 `;
 
 const StyledReactModal = styled(ReactModal)`
@@ -36,6 +53,7 @@ const StyledReactModal = styled(ReactModal)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 `;
 
 const CloseIcon = styled(ImCross)`
@@ -49,7 +67,7 @@ const ButtonsWrapper = styled.div`
   width: 80%;
   display: flex;
   justify-content: space-evenly;
-  margin: 16px 0;
+  margin: 32px 0 16px;
 `;
 
 const AppInfo = ({ data, refresh, unfollow }) => {
@@ -73,18 +91,23 @@ const AppInfo = ({ data, refresh, unfollow }) => {
   return (
     <Container>
       <Logo src={logo} alt={`${name} logo`}></Logo>
-      <span>{name}</span>
+      <StyledName onClick={() => setIsModalOpen(true)}>{name}</StyledName>
       <Button onClick={() => setIsModalOpen(true)}> <ImInfo /></Button>
       <StyledReactModal isOpen={isModalOpen}>
         <h2>{name}</h2>
         <CloseIcon onClick={() => setIsModalOpen(false)}/>
-        <p>Company: {company}</p>
-        <p>Users: {usersNumber}</p>
-        <p>Active users: {activeUsersNumber}</p>
-        <p>Server address: {serverAddress}</p>
-        <p>Admin:</p>
-        <p>name: {adminFirstName} {adminLastName}</p>
-        <p>email: {adminEmail}</p>
+        <p><b>Company:</b> {company}</p>
+        <p><b>Server address:</b> {serverAddress}</p>
+          <div>
+            <p><ImUsers /> <b>Users</b></p>
+            <p>all: {usersNumber}</p>
+            <p>active: {activeUsersNumber}</p>
+          </div>
+          <div>
+            <p><ImUserTie /> <b>Admin</b></p>
+            <p>{adminFirstName} {adminLastName}</p>
+            <p>{adminEmail}</p>
+          </div>
         <ButtonsWrapper>
           <Button onClick={() => unfollow(id)}>Unfollow <ImEyeMinus/></Button>
           <Button onClick={refresh}>Refresh <ImSpinner11/></Button>
