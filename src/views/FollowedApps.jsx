@@ -26,10 +26,6 @@ const Info = styled.p`
 const FollowedApps = () => {
   const [followedAppsIds, setFollowedAppsIds] = useContext(AppContext);
 
-  // const follow = (id) => {
-  //   setFollowedAppsIds([...followedAppsIds, id]);
-  // };
-
   const unfollow = (id) => {
     setFollowedAppsIds(followedAppsIds.filter((checked) => checked !== id));
   };
@@ -39,17 +35,17 @@ const FollowedApps = () => {
       <h2>Followed apps</h2>
       <BoxesContainer>
         {followedAppsIds?.length > 0 ? (followedAppsIds.map((appId) => (
-          <FollowedAppBox 
+          <FollowedAppBox
             key={appId}
-            id={appId}
+            appId={appId}
             unfollow={unfollow}
           />
         ))) : (
-        <Info>You don't follow any apps yet, please choose some frome the side panel</Info>
+          <Info>You don&apos;t follow any apps yet, please choose some frome the side panel</Info>
         )}
       </BoxesContainer>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default FollowedApps
+export default FollowedApps;

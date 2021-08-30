@@ -21,12 +21,10 @@ const StyledButton = styled.div`
   }
 `;
 
-const Button = ({ children, onClick }) => {
-  return (
-    <StyledButton onClick={onClick}>
-      {children}
-    </StyledButton>
-  )
-}
+const Button = ({ children, onClick }) => (
+  <StyledButton onClick={onClick}>
+    {children}
+  </StyledButton>
+);
 
 export default Button;

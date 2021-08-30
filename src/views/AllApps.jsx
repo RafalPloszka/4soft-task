@@ -1,3 +1,4 @@
+import React from 'react';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
 
@@ -21,23 +22,22 @@ const TableContainer = styled.div`
 `;
 
 const AllApps = () => {
-  const fetchAllApps = async () =>
-    await (await fetch("https://api.recruitment.4soft.tech/list")).json();
-  
-  const { data, error, status } = useQuery("allAps", fetchAllApps);
-  
+  const fetchAllApps = async () => (await fetch('https://api.recruitment.4soft.tech/list')).json();
+
+  const { data, error, status } = useQuery('allAps', fetchAllApps);
+
   return (
     <Wrapper>
       <h2>All apps</h2>
       <TableContainer>
-        {status === "error" && <div>{error.message}</div>}
+        {status === 'error' && <div>{error.message}</div>}
 
-        {status === "loading" && <div>Loading...</div>}
+        {status === 'loading' && <div>Loading...</div>}
 
-        {status === "success" && <AllAppsTable apps={data} />}
+        {status === 'success' && <AllAppsTable apps={data} />}
       </TableContainer>
     </Wrapper>
   );
-}
+};
 
 export default AllApps;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
-import { 
-  ImInfo, 
+import {
+  ImInfo,
   ImEyeMinus,
   ImSpinner11,
   ImCross,
@@ -10,7 +10,7 @@ import {
   ImUserTie,
 } from 'react-icons/im';
 
-import { Button } from '.';
+import Button from './Button';
 
 ReactModal.setAppElement('#root');
 
@@ -73,7 +73,7 @@ const ButtonsWrapper = styled.div`
 const AppInfo = ({ data, refresh, unfollow }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { 
+  const {
     id,
     name,
     logo,
@@ -81,7 +81,7 @@ const AppInfo = ({ data, refresh, unfollow }) => {
     number_of_users: usersNumber,
     number_of_active_users: activeUsersNumber,
     server_address: serverAddress,
-    admin: { 
+    admin: {
       first_name: adminFirstName,
       last_name: adminLastName,
       email: adminEmail,
@@ -90,31 +90,53 @@ const AppInfo = ({ data, refresh, unfollow }) => {
 
   return (
     <Container>
-      <Logo src={logo} alt={`${name} logo`}></Logo>
+      <Logo src={logo} alt={`${name} logo`} />
       <StyledName onClick={() => setIsModalOpen(true)}>{name}</StyledName>
-      <Button onClick={() => setIsModalOpen(true)}> <ImInfo /></Button>
+      <Button onClick={() => setIsModalOpen(true)}>
+        <ImInfo />
+      </Button>
       <StyledReactModal isOpen={isModalOpen}>
         <h2>{name}</h2>
-        <CloseIcon onClick={() => setIsModalOpen(false)}/>
-        <p><b>Company:</b> {company}</p>
-        <p><b>Server address:</b> {serverAddress}</p>
-          <div>
-            <p><ImUsers /> <b>Users</b></p>
-            <p>all: {usersNumber}</p>
-            <p>active: {activeUsersNumber}</p>
-          </div>
-          <div>
-            <p><ImUserTie /> <b>Admin</b></p>
-            <p>{adminFirstName} {adminLastName}</p>
-            <p>{adminEmail}</p>
-          </div>
+        <CloseIcon onClick={() => setIsModalOpen(false)} />
+        <p>
+          <b>Company: </b>
+          {company}
+        </p>
+        <p>
+          <b>Server address: </b>
+          {serverAddress}
+        </p>
+        <div>
+          <p>
+            <ImUsers /> <b>Users</b>
+          </p>
+          <p>
+            all: {usersNumber}
+          </p>
+          <p>
+            active: {activeUsersNumber}
+          </p>
+        </div>
+        <div>
+          <p>
+            <ImUserTie /> <b>Admin</b>
+          </p>
+          <p>
+            {adminFirstName} {adminLastName}
+          </p>
+          <p>{adminEmail}</p>
+        </div>
         <ButtonsWrapper>
-          <Button onClick={() => unfollow(id)}>Unfollow <ImEyeMinus/></Button>
-          <Button onClick={refresh}>Refresh <ImSpinner11/></Button>
+          <Button onClick={() => unfollow(id)}>
+            Unfollow <ImEyeMinus />
+          </Button>
+          <Button onClick={refresh}>
+            Refresh <ImSpinner11 />
+          </Button>
         </ButtonsWrapper>
       </StyledReactModal>
     </Container>
-  )
-}
+  );
+};
 
-export default AppInfo
+export default AppInfo;

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
- 
+
 const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
@@ -18,5 +18,5 @@ const GlobalStyle = createGlobalStyle`
     --shadow: #42445a;
   }
 `;
- 
+
 export default GlobalStyle;

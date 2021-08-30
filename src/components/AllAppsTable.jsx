@@ -12,7 +12,7 @@ const Table = styled.table`
 `;
 
 const Tr = styled.tr`
-  color: ${props => props.followed ? "var(--main)" : "#fff"};
+  color: ${(props) => (props.followed ? 'var(--main)' : '#fff')};
 `;
 
 const Th = styled.th`
@@ -51,25 +51,24 @@ const AllAppsTable = ({ apps }) => {
     setFollowedAppsIds(followedAppsIds.filter((checked) => checked !== id));
   };
 
-  const rows = apps.map((app, index) => {
+  const rows = apps.map((app) => {
     const isFollowed = followedAppsIds.includes(app.id);
     return (
       <Tr
-        key={index}
+        key={app.id}
         followed={isFollowed}
       >
         <td>{app.id}</td>
         <td>{app.name}</td>
         <td>{app.company}</td>
         <IconCell>
-          {!isFollowed ? 
-            <StyledImEyePlus onClick={() => follow(app.id)}/>
-            : <StyledImEyeMinus onClick={() => unfollow(app.id)}/>
-          }
+          {!isFollowed
+            ? <StyledImEyePlus onClick={() => follow(app.id)} />
+            : <StyledImEyeMinus onClick={() => unfollow(app.id)} />}
         </IconCell>
       </Tr>
     );
-  })
+  });
 
   return (
     <div>
@@ -85,7 +84,7 @@ const AllAppsTable = ({ apps }) => {
         <tbody>{rows}</tbody>
       </Table>
     </div>
-  )
-}
+  );
+};
 
 export default AllAppsTable;

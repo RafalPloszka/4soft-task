@@ -1,3 +1,4 @@
+import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import styled from 'styled-components';
 
@@ -16,7 +17,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <AppContextProvider>
-      <GlobalStyle />
+        <GlobalStyle />
         <Wrapper>
           <FollowedApps />
           <AllApps />
@@ -24,6 +25,6 @@ const App = () => {
       </AppContextProvider>
     </QueryClientProvider>
   );
-}
+};
 
 export default App;
